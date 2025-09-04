@@ -9,12 +9,9 @@
     ],
     "scripts": {
         "lint": "eslint -c ./src/.eslintrc.json lib",
-        "tsc:lib": "tsc -p src/common/tsconfig.json",
-        "tsc:tests": "tsc -p tests/tsconfig.json",
-        "check": "npm run lint && npm run tsc:lib && npm run tsc:tests",
         "build:ssjs-transpiler": "cd src/ssjs-transpiler && tspc",
-        "build:addatation-files": "node src/copy-projects.js",
-        "prepare": "ts-patch install -s"
+        "build:lib-files": "node src/copy-projects.js",
+        "build": "npm run build:ssjs-transpiler && npm run build:lib-files"
     },
     "repository": {
         "type": "git",
