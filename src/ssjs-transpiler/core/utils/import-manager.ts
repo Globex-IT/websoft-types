@@ -15,15 +15,9 @@ const imports: id.ImportDetails[] = [
 export class ImportManager {
     public addFuncImports(content: string) {
         imports.forEach(({ method, path }) => {
-            const methodRegex = new RegExp(`\\${method}\\(([^)]*)\\)`, 'g');
-
-            let match;
-            while ((match = methodRegex.exec(content)) !== null) {
-                const args = match[1];
-                if (args.includes('=>')) {
-                    content = `//=require ${path} \n` + content;
-                    break;
-                }
+            const methodRegex = new RegExp(`\\${method}\\s*\\(`, "g");
+            if (methodRegex.test(content)) {
+                content = `//=require ${path} \n` + content;
             }
         });
 
